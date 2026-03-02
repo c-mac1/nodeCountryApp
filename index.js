@@ -1,6 +1,7 @@
 import { fetchCountries } from "./src/api/fetchCountries.js";
 import { processCountryData } from "./src/services/processCountryData.js";
 import { writeAllFiles } from "./src/services/fileWriteServices.js";
+import { logger } from "./src/utils/logger.js";
 
 async function main() {
   try {
@@ -9,13 +10,14 @@ async function main() {
     const result = await writeAllFiles(processed);
 
     if (result) {
-      console.log(`Fetched ${rawCountries.length} countries`);
-      console.log(`Files written to ${result.csvPath} and ${result.htmlPath}`);
+      logger.info(`Fetched ${rawCountries.length} countries`);
+      logger.info(`Files written to: ${result.csvPath} and ${result.htmlPath}`);
     }
 
     process.exit(0);
   } catch (error) {
-    console.error("Error:", error.message);
+    logger.error("Application failed:", error.message);
+    logger.debug("Full error stack:", error.stack);
     process.exit(1);
   }
 }

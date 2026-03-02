@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { toCSV } from "./toCSV.js";
+import { logger } from "../../utils/logger.js";
 
 export async function writeCSVFile(data, outputPath) {
   try {
@@ -10,6 +11,7 @@ export async function writeCSVFile(data, outputPath) {
     const csvData = toCSV(data, ["flag"]);
     fs.writeFileSync(outputPath, csvData, "utf8");
   } catch (error) {
+    logger.error("Failed to write CSV file:", error.message);
     throw new Error(`Failed to write CSV file: ${error.message}`);
   }
 }

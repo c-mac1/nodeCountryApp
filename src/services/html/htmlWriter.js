@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { toHTML } from "./toHTML.js";
+import { logger } from "../../utils/logger.js";
 
 export async function writeHTMLFile(
   data,
@@ -15,6 +16,7 @@ export async function writeHTMLFile(
     const htmlData = toHTML(data, title);
     fs.writeFileSync(outputPath, htmlData, "utf8");
   } catch (error) {
+    logger.error("Failed to write HTML file:", error.message);
     throw new Error(`Failed to write HTML file: ${error.message}`);
   }
 }

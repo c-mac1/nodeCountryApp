@@ -1,3 +1,6 @@
+import { logger } from "../../utils/logger.js";
+import { validateData } from "../../utils/validateData.js";
+
 export function toCSV(data, excludeFields = []) {
   validateData(data);
 
@@ -20,15 +23,7 @@ export function toCSV(data, excludeFields = []) {
       .join(",");
   });
 
+  logger.success("CSV document generated successfully");
+
   return [colHeaders.join(","), ...rows].join("\n");
-}
-
-function validateData(data) {
-  if (!Array.isArray(data)) {
-    throw new Error("Data must be an array of objects.");
-  }
-
-  if (!data || data.length === 0) {
-    throw new Error("No data provided to convert to CSV.");
-  }
 }

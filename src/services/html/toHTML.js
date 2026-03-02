@@ -11,7 +11,7 @@ export function toHTML(data, title = "Countries Report") {
         : "";
 
       return `
-        <tr class="${rowClass}">
+        <tr class="${rowClass}" data-name="${country.name}" data-capital="${country.capital}" data-population="${country.population?.replace(/,/g, "") || "0"}" data-languages="${country.languages}" data-currency="${country.currency}">
             <td>${flagImg}</td>
             <td>${country.name}</td>
             <td>${country.capital}</td>
@@ -61,6 +61,31 @@ export function toHTML(data, title = "Countries Report") {
             padding: 12px 8px;
             text-align: left;
             font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+        
+        th:hover {
+            background-color: #45a049;
+        }
+        
+        th.sortable::after {
+            content: '↕';
+            margin-left: 8px;
+            font-size: 12px;
+        }
+        
+        th.sort-asc::after {
+            content: '↑';
+            margin-left: 8px;
+            font-size: 12px;
+        }
+        
+        th.sort-desc::after {
+            content: '↓';
+            margin-left: 8px;
+            font-size: 12px;
         }
         
         td {
@@ -90,21 +115,85 @@ export function toHTML(data, title = "Countries Report") {
     <h1>${title}</h1>
     <p class="timestamp">Report generated on: ${timestamp}</p>
     
-    <table>
+    <table id="countriesTable">
         <thead>
             <tr>
                 <th>Flag</th>
-                <th>Country</th>
-                <th>Capital</th>
-                <th>Population</th>
-                <th>Languages</th>
-                <th>Currency</th>
+                <th class="sortable" data-column="name" data-type="text">Country</th>
+                <th class="sortable" data-column="capital" data-type="text">Capital</th>
+                <th class="sortable" data-column="population" data-type="number">Population</th>
+                <th class="sortable" data-column="languages" data-type="text">Languages</th>
+                <th class="sortable" data-column="currency" data-type="text">Currency</th>
             </tr>
         </thead>
         <tbody>
             ${tableRows}
         </tbody>
     </table>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const table = document.getElementById('countriesTable');
+        const headers = table.querySelectorAll('th.sortable');
+        let currentSort = { column: null, direction: 'asc' };
+        
+        headers.forEach(header => {
+            header.addEventListener('click', function() {
+                const column = this.dataset.column;
+                const type = this.dataset.type;
+                
+                // Toggle sort direction
+                if (currentSort.column === column) {
+                    currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    currentSort.direction = 'asc';
+                }
+                
+                currentSort.column = column;
+                
+                // Update header styles
+                headers.forEach(h => {
+                    h.classList.remove('sort-asc', 'sort-desc');
+                });
+                
+                this.classList.add(currentSort.direction === 'asc' ? 'sort-asc' : 'sort-desc');
+                
+                // Sort the table
+                sortTable(column, type, currentSort.direction);
+            });
+        });
+        
+        function sortTable(column, type, direction) {
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            rows.sort((a, b) => {
+                let aVal = a.dataset[column];
+                let bVal = b.dataset[column];
+                
+                if (type === 'number') {
+                    aVal = parseInt(aVal) || 0;
+                    bVal = parseInt(bVal) || 0;
+                    return direction === 'asc' ? aVal - bVal : bVal - aVal;
+                } else {
+                    aVal = aVal.toLowerCase();
+                    bVal = bVal.toLowerCase();
+                    if (direction === 'asc') {
+                        return aVal.localeCompare(bVal);
+                    } else {
+                        return bVal.localeCompare(aVal);
+                    }
+                }
+            });
+            
+            // Re-add rows and update row classes
+            rows.forEach((row, index) => {
+                row.className = index % 2 === 0 ? 'even' : 'odd';
+                tbody.appendChild(row);
+            });
+        }
+    });
+    </script>
 </body>
 </html>`;
 }

@@ -37,6 +37,31 @@
             padding: 12px 8px;
             text-align: left;
             font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+        
+        th:hover {
+            background-color: #45a049;
+        }
+        
+        th.sortable::after {
+            content: '↕';
+            margin-left: 8px;
+            font-size: 12px;
+        }
+        
+        th.sort-asc::after {
+            content: '↑';
+            margin-left: 8px;
+            font-size: 12px;
+        }
+        
+        th.sort-desc::after {
+            content: '↓';
+            margin-left: 8px;
+            font-size: 12px;
         }
         
         td {
@@ -64,22 +89,22 @@
 </head>
 <body>
     <h1>European Countries Report</h1>
-    <p class="timestamp">Report generated on: 3/2/2026, 6:22:21 PM</p>
+    <p class="timestamp">Report generated on: 3/2/2026, 6:28:12 PM</p>
     
-    <table>
+    <table id="countriesTable">
         <thead>
             <tr>
                 <th>Flag</th>
-                <th>Country</th>
-                <th>Capital</th>
-                <th>Population</th>
-                <th>Languages</th>
-                <th>Currency</th>
+                <th class="sortable" data-column="name" data-type="text">Country</th>
+                <th class="sortable" data-column="capital" data-type="text">Capital</th>
+                <th class="sortable" data-column="population" data-type="number">Population</th>
+                <th class="sortable" data-column="languages" data-type="text">Languages</th>
+                <th class="sortable" data-column="currency" data-type="text">Currency</th>
             </tr>
         </thead>
         <tbody>
             
-        <tr class="even">
+        <tr class="even" data-name="Åland Islands" data-capital="Mariehamn" data-population="30654" data-languages="Swedish" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/ax.png" alt="Åland Islands flag" width="30" height="20"></td>
             <td>Åland Islands</td>
             <td>Mariehamn</td>
@@ -87,7 +112,7 @@
             <td>Swedish</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Albania" data-capital="Tirana" data-population="2363314" data-languages="Albanian" data-currency="Albanian lek (L)">
             <td><img src="https://flagcdn.com/w320/al.png" alt="Albania flag" width="30" height="20"></td>
             <td>Albania</td>
             <td>Tirana</td>
@@ -95,7 +120,7 @@
             <td>Albanian</td>
             <td>Albanian lek (L)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Andorra" data-capital="Andorra la Vella" data-population="88406" data-languages="Catalan" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/ad.png" alt="Andorra flag" width="30" height="20"></td>
             <td>Andorra</td>
             <td>Andorra la Vella</td>
@@ -103,7 +128,7 @@
             <td>Catalan</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Austria" data-capital="Vienna" data-population="9200931" data-languages="German" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/at.png" alt="Austria flag" width="30" height="20"></td>
             <td>Austria</td>
             <td>Vienna</td>
@@ -111,7 +136,7 @@
             <td>German</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Belarus" data-capital="Minsk" data-population="9109280" data-languages="Belarusian, Russian" data-currency="Belarusian ruble (Br)">
             <td><img src="https://flagcdn.com/w320/by.png" alt="Belarus flag" width="30" height="20"></td>
             <td>Belarus</td>
             <td>Minsk</td>
@@ -119,7 +144,7 @@
             <td>Belarusian, Russian</td>
             <td>Belarusian ruble (Br)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Belgium" data-capital="Brussels" data-population="11825551" data-languages="German, French, Dutch" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/be.png" alt="Belgium flag" width="30" height="20"></td>
             <td>Belgium</td>
             <td>Brussels</td>
@@ -127,7 +152,7 @@
             <td>German, French, Dutch</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Bosnia and Herzegovina" data-capital="Sarajevo" data-population="3422000" data-languages="Bosnian, Croatian, Serbian" data-currency="Bosnia and Herzegovina convertible mark (KM)">
             <td><img src="https://flagcdn.com/w320/ba.png" alt="Bosnia and Herzegovina flag" width="30" height="20"></td>
             <td>Bosnia and Herzegovina</td>
             <td>Sarajevo</td>
@@ -135,7 +160,7 @@
             <td>Bosnian, Croatian, Serbian</td>
             <td>Bosnia and Herzegovina convertible mark (KM)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Bulgaria" data-capital="Sofia" data-population="6437360" data-languages="Bulgarian" data-currency="Bulgarian lev (лв)">
             <td><img src="https://flagcdn.com/w320/bg.png" alt="Bulgaria flag" width="30" height="20"></td>
             <td>Bulgaria</td>
             <td>Sofia</td>
@@ -143,7 +168,7 @@
             <td>Bulgarian</td>
             <td>Bulgarian lev (лв)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Croatia" data-capital="Zagreb" data-population="3866233" data-languages="Croatian" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/hr.png" alt="Croatia flag" width="30" height="20"></td>
             <td>Croatia</td>
             <td>Zagreb</td>
@@ -151,7 +176,7 @@
             <td>Croatian</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Cyprus" data-capital="Nicosia" data-population="1442614" data-languages="Greek, Turkish" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/cy.png" alt="Cyprus flag" width="30" height="20"></td>
             <td>Cyprus</td>
             <td>Nicosia</td>
@@ -159,7 +184,7 @@
             <td>Greek, Turkish</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Czechia" data-capital="Prague" data-population="10882341" data-languages="Czech, Slovak" data-currency="Czech koruna (Kč)">
             <td><img src="https://flagcdn.com/w320/cz.png" alt="Czechia flag" width="30" height="20"></td>
             <td>Czechia</td>
             <td>Prague</td>
@@ -167,7 +192,7 @@
             <td>Czech, Slovak</td>
             <td>Czech koruna (Kč)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Denmark" data-capital="Copenhagen" data-population="6011488" data-languages="Danish" data-currency="Danish krone (kr)">
             <td><img src="https://flagcdn.com/w320/dk.png" alt="Denmark flag" width="30" height="20"></td>
             <td>Denmark</td>
             <td>Copenhagen</td>
@@ -175,7 +200,7 @@
             <td>Danish</td>
             <td>Danish krone (kr)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Estonia" data-capital="Tallinn" data-population="1369995" data-languages="Estonian" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/ee.png" alt="Estonia flag" width="30" height="20"></td>
             <td>Estonia</td>
             <td>Tallinn</td>
@@ -183,7 +208,7 @@
             <td>Estonian</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Faroe Islands" data-capital="Tórshavn" data-population="54885" data-languages="Danish, Faroese" data-currency="Danish krone (kr)">
             <td><img src="https://flagcdn.com/w320/fo.png" alt="Faroe Islands flag" width="30" height="20"></td>
             <td>Faroe Islands</td>
             <td>Tórshavn</td>
@@ -191,7 +216,7 @@
             <td>Danish, Faroese</td>
             <td>Danish krone (kr)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Finland" data-capital="Helsinki" data-population="5650325" data-languages="Finnish, Swedish" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/fi.png" alt="Finland flag" width="30" height="20"></td>
             <td>Finland</td>
             <td>Helsinki</td>
@@ -199,7 +224,7 @@
             <td>Finnish, Swedish</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="France" data-capital="Paris" data-population="66351959" data-languages="French" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/fr.png" alt="France flag" width="30" height="20"></td>
             <td>France</td>
             <td>Paris</td>
@@ -207,7 +232,7 @@
             <td>French</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Germany" data-capital="Berlin" data-population="83491249" data-languages="German" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/de.png" alt="Germany flag" width="30" height="20"></td>
             <td>Germany</td>
             <td>Berlin</td>
@@ -215,7 +240,7 @@
             <td>German</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Gibraltar" data-capital="Gibraltar" data-population="38000" data-languages="English" data-currency="Gibraltar pound (£)">
             <td><img src="https://flagcdn.com/w320/gi.png" alt="Gibraltar flag" width="30" height="20"></td>
             <td>Gibraltar</td>
             <td>Gibraltar</td>
@@ -223,7 +248,7 @@
             <td>English</td>
             <td>Gibraltar pound (£)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Greece" data-capital="Athens" data-population="10400720" data-languages="Greek" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/gr.png" alt="Greece flag" width="30" height="20"></td>
             <td>Greece</td>
             <td>Athens</td>
@@ -231,7 +256,7 @@
             <td>Greek</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Guernsey" data-capital="St. Peter Port" data-population="64781" data-languages="English, French, Guernésiais" data-currency="British pound (£)">
             <td><img src="https://flagcdn.com/w320/gg.png" alt="Guernsey flag" width="30" height="20"></td>
             <td>Guernsey</td>
             <td>St. Peter Port</td>
@@ -239,7 +264,7 @@
             <td>English, French, Guernésiais</td>
             <td>British pound (£)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Hungary" data-capital="Budapest" data-population="9539502" data-languages="Hungarian" data-currency="Hungarian forint (Ft)">
             <td><img src="https://flagcdn.com/w320/hu.png" alt="Hungary flag" width="30" height="20"></td>
             <td>Hungary</td>
             <td>Budapest</td>
@@ -247,7 +272,7 @@
             <td>Hungarian</td>
             <td>Hungarian forint (Ft)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Iceland" data-capital="Reykjavik" data-population="391810" data-languages="Icelandic" data-currency="Icelandic króna (kr)">
             <td><img src="https://flagcdn.com/w320/is.png" alt="Iceland flag" width="30" height="20"></td>
             <td>Iceland</td>
             <td>Reykjavik</td>
@@ -255,7 +280,7 @@
             <td>Icelandic</td>
             <td>Icelandic króna (kr)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Ireland" data-capital="Dublin" data-population="5458600" data-languages="English, Irish" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/ie.png" alt="Ireland flag" width="30" height="20"></td>
             <td>Ireland</td>
             <td>Dublin</td>
@@ -263,7 +288,7 @@
             <td>English, Irish</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Isle of Man" data-capital="Douglas" data-population="84530" data-languages="English, Manx" data-currency="British pound (£)">
             <td><img src="https://flagcdn.com/w320/im.png" alt="Isle of Man flag" width="30" height="20"></td>
             <td>Isle of Man</td>
             <td>Douglas</td>
@@ -271,7 +296,7 @@
             <td>English, Manx</td>
             <td>British pound (£)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Italy" data-capital="Rome" data-population="58927633" data-languages="Italian, Catalan" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/it.png" alt="Italy flag" width="30" height="20"></td>
             <td>Italy</td>
             <td>Rome</td>
@@ -279,7 +304,7 @@
             <td>Italian, Catalan</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Jersey" data-capital="Saint Helier" data-population="103267" data-languages="English, French, Jèrriais" data-currency="British pound (£)">
             <td><img src="https://flagcdn.com/w320/je.png" alt="Jersey flag" width="30" height="20"></td>
             <td>Jersey</td>
             <td>Saint Helier</td>
@@ -287,7 +312,7 @@
             <td>English, French, Jèrriais</td>
             <td>British pound (£)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Kosovo" data-capital="Pristina" data-population="1585566" data-languages="Albanian, Serbian" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/xk.png" alt="Kosovo flag" width="30" height="20"></td>
             <td>Kosovo</td>
             <td>Pristina</td>
@@ -295,7 +320,7 @@
             <td>Albanian, Serbian</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Latvia" data-capital="Riga" data-population="1829000" data-languages="Latvian" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/lv.png" alt="Latvia flag" width="30" height="20"></td>
             <td>Latvia</td>
             <td>Riga</td>
@@ -303,7 +328,7 @@
             <td>Latvian</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Liechtenstein" data-capital="Vaduz" data-population="40900" data-languages="German" data-currency="Swiss franc (Fr)">
             <td><img src="https://flagcdn.com/w320/li.png" alt="Liechtenstein flag" width="30" height="20"></td>
             <td>Liechtenstein</td>
             <td>Vaduz</td>
@@ -311,7 +336,7 @@
             <td>German</td>
             <td>Swiss franc (Fr)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Lithuania" data-capital="Vilnius" data-population="2894886" data-languages="Lithuanian" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/lt.png" alt="Lithuania flag" width="30" height="20"></td>
             <td>Lithuania</td>
             <td>Vilnius</td>
@@ -319,7 +344,7 @@
             <td>Lithuanian</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Luxembourg" data-capital="Luxembourg" data-population="681973" data-languages="German, French, Luxembourgish" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/lu.png" alt="Luxembourg flag" width="30" height="20"></td>
             <td>Luxembourg</td>
             <td>Luxembourg</td>
@@ -327,7 +352,7 @@
             <td>German, French, Luxembourgish</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Malta" data-capital="Valletta" data-population="574250" data-languages="English, Maltese" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/mt.png" alt="Malta flag" width="30" height="20"></td>
             <td>Malta</td>
             <td>Valletta</td>
@@ -335,7 +360,7 @@
             <td>English, Maltese</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Moldova" data-capital="Chișinău" data-population="2749076" data-languages="Romanian" data-currency="Moldovan leu (L)">
             <td><img src="https://flagcdn.com/w320/md.png" alt="Moldova flag" width="30" height="20"></td>
             <td>Moldova</td>
             <td>Chișinău</td>
@@ -343,7 +368,7 @@
             <td>Romanian</td>
             <td>Moldovan leu (L)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Monaco" data-capital="Monaco" data-population="38423" data-languages="French" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/mc.png" alt="Monaco flag" width="30" height="20"></td>
             <td>Monaco</td>
             <td>Monaco</td>
@@ -351,7 +376,7 @@
             <td>French</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Montenegro" data-capital="Podgorica" data-population="623327" data-languages="Montenegrin" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/me.png" alt="Montenegro flag" width="30" height="20"></td>
             <td>Montenegro</td>
             <td>Podgorica</td>
@@ -359,7 +384,7 @@
             <td>Montenegrin</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Netherlands" data-capital="Amsterdam" data-population="18100436" data-languages="Dutch" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/nl.png" alt="Netherlands flag" width="30" height="20"></td>
             <td>Netherlands</td>
             <td>Amsterdam</td>
@@ -367,7 +392,7 @@
             <td>Dutch</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="North Macedonia" data-capital="Skopje" data-population="1822612" data-languages="Macedonian" data-currency="denar (den)">
             <td><img src="https://flagcdn.com/w320/mk.png" alt="North Macedonia flag" width="30" height="20"></td>
             <td>North Macedonia</td>
             <td>Skopje</td>
@@ -375,7 +400,7 @@
             <td>Macedonian</td>
             <td>denar (den)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Norway" data-capital="Oslo" data-population="5606944" data-languages="Norwegian Nynorsk, Norwegian Bokmål, Sami" data-currency="Norwegian krone (kr)">
             <td><img src="https://flagcdn.com/w320/no.png" alt="Norway flag" width="30" height="20"></td>
             <td>Norway</td>
             <td>Oslo</td>
@@ -383,7 +408,7 @@
             <td>Norwegian Nynorsk, Norwegian Bokmål, Sami</td>
             <td>Norwegian krone (kr)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Poland" data-capital="Warsaw" data-population="37392000" data-languages="Polish" data-currency="Polish złoty (zł)">
             <td><img src="https://flagcdn.com/w320/pl.png" alt="Poland flag" width="30" height="20"></td>
             <td>Poland</td>
             <td>Warsaw</td>
@@ -391,7 +416,7 @@
             <td>Polish</td>
             <td>Polish złoty (zł)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Portugal" data-capital="Lisbon" data-population="10749635" data-languages="Portuguese" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/pt.png" alt="Portugal flag" width="30" height="20"></td>
             <td>Portugal</td>
             <td>Lisbon</td>
@@ -399,7 +424,7 @@
             <td>Portuguese</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Romania" data-capital="Bucharest" data-population="19036031" data-languages="Romanian" data-currency="Romanian leu (lei)">
             <td><img src="https://flagcdn.com/w320/ro.png" alt="Romania flag" width="30" height="20"></td>
             <td>Romania</td>
             <td>Bucharest</td>
@@ -407,7 +432,7 @@
             <td>Romanian</td>
             <td>Romanian leu (lei)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Russia" data-capital="Moscow" data-population="146028325" data-languages="Russian" data-currency="Russian ruble (₽)">
             <td><img src="https://flagcdn.com/w320/ru.png" alt="Russia flag" width="30" height="20"></td>
             <td>Russia</td>
             <td>Moscow</td>
@@ -415,7 +440,7 @@
             <td>Russian</td>
             <td>Russian ruble (₽)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="San Marino" data-capital="City of San Marino" data-population="34132" data-languages="Italian" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/sm.png" alt="San Marino flag" width="30" height="20"></td>
             <td>San Marino</td>
             <td>City of San Marino</td>
@@ -423,7 +448,7 @@
             <td>Italian</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Serbia" data-capital="Belgrade" data-population="6567783" data-languages="Serbian" data-currency="Serbian dinar (дин.)">
             <td><img src="https://flagcdn.com/w320/rs.png" alt="Serbia flag" width="30" height="20"></td>
             <td>Serbia</td>
             <td>Belgrade</td>
@@ -431,7 +456,7 @@
             <td>Serbian</td>
             <td>Serbian dinar (дин.)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Slovakia" data-capital="Bratislava" data-population="5413813" data-languages="Slovak" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/sk.png" alt="Slovakia flag" width="30" height="20"></td>
             <td>Slovakia</td>
             <td>Bratislava</td>
@@ -439,7 +464,7 @@
             <td>Slovak</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Slovenia" data-capital="Ljubljana" data-population="2130638" data-languages="Slovene" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/si.png" alt="Slovenia flag" width="30" height="20"></td>
             <td>Slovenia</td>
             <td>Ljubljana</td>
@@ -447,7 +472,7 @@
             <td>Slovene</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Spain" data-capital="Madrid" data-population="49315949" data-languages="Spanish, Catalan, Basque, Galician" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/es.png" alt="Spain flag" width="30" height="20"></td>
             <td>Spain</td>
             <td>Madrid</td>
@@ -455,7 +480,7 @@
             <td>Spanish, Catalan, Basque, Galician</td>
             <td>euro (€)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Svalbard and Jan Mayen" data-capital="Longyearbyen" data-population="2530" data-languages="Norwegian" data-currency="krone (kr)">
             <td><img src="https://flagcdn.com/w320/sj.png" alt="Svalbard and Jan Mayen flag" width="30" height="20"></td>
             <td>Svalbard and Jan Mayen</td>
             <td>Longyearbyen</td>
@@ -463,7 +488,7 @@
             <td>Norwegian</td>
             <td>krone (kr)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Sweden" data-capital="Stockholm" data-population="10605098" data-languages="Swedish" data-currency="Swedish krona (kr)">
             <td><img src="https://flagcdn.com/w320/se.png" alt="Sweden flag" width="30" height="20"></td>
             <td>Sweden</td>
             <td>Stockholm</td>
@@ -471,7 +496,7 @@
             <td>Swedish</td>
             <td>Swedish krona (kr)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="Switzerland" data-capital="Bern" data-population="9082848" data-languages="French, Swiss German, Italian, Romansh" data-currency="Swiss franc (Fr.)">
             <td><img src="https://flagcdn.com/w320/ch.png" alt="Switzerland flag" width="30" height="20"></td>
             <td>Switzerland</td>
             <td>Bern</td>
@@ -479,7 +504,7 @@
             <td>French, Swiss German, Italian, Romansh</td>
             <td>Swiss franc (Fr.)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Ukraine" data-capital="Kyiv" data-population="32862000" data-languages="Ukrainian" data-currency="Ukrainian hryvnia (₴)">
             <td><img src="https://flagcdn.com/w320/ua.png" alt="Ukraine flag" width="30" height="20"></td>
             <td>Ukraine</td>
             <td>Kyiv</td>
@@ -487,7 +512,7 @@
             <td>Ukrainian</td>
             <td>Ukrainian hryvnia (₴)</td>
         </tr>
-        <tr class="odd">
+        <tr class="odd" data-name="United Kingdom" data-capital="London" data-population="69281437" data-languages="English" data-currency="British pound (£)">
             <td><img src="https://flagcdn.com/w320/gb.png" alt="United Kingdom flag" width="30" height="20"></td>
             <td>United Kingdom</td>
             <td>London</td>
@@ -495,7 +520,7 @@
             <td>English</td>
             <td>British pound (£)</td>
         </tr>
-        <tr class="even">
+        <tr class="even" data-name="Vatican City" data-capital="Vatican City" data-population="882" data-languages="Italian, Latin" data-currency="euro (€)">
             <td><img src="https://flagcdn.com/w320/va.png" alt="Vatican City flag" width="30" height="20"></td>
             <td>Vatican City</td>
             <td>Vatican City</td>
@@ -505,5 +530,69 @@
         </tr>
         </tbody>
     </table>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const table = document.getElementById('countriesTable');
+        const headers = table.querySelectorAll('th.sortable');
+        let currentSort = { column: null, direction: 'asc' };
+        
+        headers.forEach(header => {
+            header.addEventListener('click', function() {
+                const column = this.dataset.column;
+                const type = this.dataset.type;
+                
+                // Toggle sort direction
+                if (currentSort.column === column) {
+                    currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    currentSort.direction = 'asc';
+                }
+                
+                currentSort.column = column;
+                
+                // Update header styles
+                headers.forEach(h => {
+                    h.classList.remove('sort-asc', 'sort-desc');
+                });
+                
+                this.classList.add(currentSort.direction === 'asc' ? 'sort-asc' : 'sort-desc');
+                
+                // Sort the table
+                sortTable(column, type, currentSort.direction);
+            });
+        });
+        
+        function sortTable(column, type, direction) {
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            rows.sort((a, b) => {
+                let aVal = a.dataset[column];
+                let bVal = b.dataset[column];
+                
+                if (type === 'number') {
+                    aVal = parseInt(aVal) || 0;
+                    bVal = parseInt(bVal) || 0;
+                    return direction === 'asc' ? aVal - bVal : bVal - aVal;
+                } else {
+                    aVal = aVal.toLowerCase();
+                    bVal = bVal.toLowerCase();
+                    if (direction === 'asc') {
+                        return aVal.localeCompare(bVal);
+                    } else {
+                        return bVal.localeCompare(aVal);
+                    }
+                }
+            });
+            
+            // Re-add rows and update row classes
+            rows.forEach((row, index) => {
+                row.className = index % 2 === 0 ? 'even' : 'odd';
+                tbody.appendChild(row);
+            });
+        }
+    });
+    </script>
 </body>
 </html>

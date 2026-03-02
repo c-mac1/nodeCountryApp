@@ -6,7 +6,6 @@ export function toCSV(data, excludeFields = []) {
   const colHeaders = allHeaders.filter(
     (header) => !excludeFields.includes(header),
   );
-  console.log(data);
   const rows = data.map((row) => {
     return colHeaders
       .map((header) => {

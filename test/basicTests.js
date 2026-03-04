@@ -3,6 +3,7 @@ import { getSubregionFromArgs } from "../src/utils/cliParser.js";
 import { processCountryData } from "../src/services/processCountryData.js";
 import { fetchCountries } from "../src/api/fetchCountries.js";
 
+//Ai generated
 function runTest(name, testFn) {
   try {
     testFn();
@@ -12,6 +13,7 @@ function runTest(name, testFn) {
   }
 }
 
+// Ai generated - for async tests
 async function runAsyncTest(name, testFn) {
   try {
     await testFn();
@@ -74,6 +76,7 @@ function testProcessInvalidData() {
   assert.strictEqual(result.length, 0);
 }
 
+//Ai generated
 async function testFetchFromAPI() {
   const countries = await fetchCountries();
   assert(Array.isArray(countries), "Should return an array");

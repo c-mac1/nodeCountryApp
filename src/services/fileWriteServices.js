@@ -2,11 +2,18 @@ import { writeCSVFile } from "./csv/csvWriter.js";
 import { writeHTMLFile } from "./html/htmlWriter.js";
 import { checkAnyFilesExist, askOverwrite } from "../utils/filePrompts.js";
 
-export async function writeAllFiles(data, options = {}) {
+export async function writeAllFiles(data, subregion = null, options = {}) {
+  // Generate filenames based on sub-region
+  const filePrefix = subregion
+    ? subregion.toLowerCase().replace(/\s+/g, "_")
+    : "european";
+
   const {
-    csvPath = "./output/european_countries.csv",
-    htmlPath = "./output/countries.html",
-    htmlTitle = "European Countries Report",
+    csvPath = `./output/${filePrefix}_countries.csv`,
+    htmlPath = `./output/${filePrefix}_countries.html`,
+    htmlTitle = subregion
+      ? `${subregion} Countries Report`
+      : "European Countries Report",
   } = options;
 
   // Check for existing files and ask user once

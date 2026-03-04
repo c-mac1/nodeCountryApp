@@ -11,6 +11,7 @@ export function getSubregionFromArgs() {
 
   // Show help if requested
   if (args.includes("--help") || args.includes("-h")) {
+    console.log(`Usage: node index.js [subregion]
     
 Available subregions: ${VALID_SUBREGIONS.join(", ")}
     
